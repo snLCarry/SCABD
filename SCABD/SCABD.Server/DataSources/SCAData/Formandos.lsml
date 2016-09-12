@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Formando">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Nome"
+        PropertyType=":String">
+        <KeyProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Country"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="CIty"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Address"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Curso_Disciplina_Moduloes"
+        Association="FK_Curso_Disciplina_Modulo_Formandos"
+        FromEnd="Formandos"
+        ToEnd="Curso_Disciplina_Modulo" />
+      <EntityProperty
+        Name="Foto"
+        PropertyType=":Binary?">
+        <EntityProperty.Attributes>
+          <NotSortable />
+          <MaxLength />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Curso_Disciplina_Modulo_Formandos">
+    <AssociationEnd
+      Name="Formandos"
+      EntityType="Formando">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Curso_Disciplina_Modulo"
+      Multiplicity="Many"
+      EntityType="Curso_Disciplina_Modulo" />
+  </Association>
+  <EntityContainer
+    Name="SCAData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Formandos"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Formando" />
+    <AssociationSet
+      Name="FK_Curso_Disciplina_Modulo_Formandos"
+      Association="FK_Curso_Disciplina_Modulo_Formandos">
+      <AssociationSetEnd
+        Name="Formandos"
+        EntitySet="Formandos" />
+      <AssociationSetEnd
+        Name="Curso_Disciplina_Modulo"
+        EntitySet="Curso_Disciplina_Moduloes" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Formandos_Single"
+      ReturnType="Formando">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Nome" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Nome" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Formandos" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Nome"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Nome' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Formandos_SingleOrDefault"
+      ReturnType="Formando">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Nome" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Nome" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Formandos" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Nome"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Nome' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SCADataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Formandos">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Formandos" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Nome"
+          Nullable="False"
+          Type="varchar"
+          Property="Formando/Properties[Nome]" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Country"
+          Nullable="True"
+          Type="varchar"
+          Property="Formando/Properties[Country]" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="CIty"
+          Nullable="True"
+          Type="varchar"
+          Property="Formando/Properties[CIty]" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Address"
+          Nullable="True"
+          Type="varchar"
+          Property="Formando/Properties[Address]" />
+        <SsdlProperty
+          Name="Foto"
+          Nullable="True"
+          Type="image"
+          Property="Formando/Properties[Foto]" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Curso_Disciplina_Modulo_Formandos">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Curso_Disciplina_Modulo_Formandos" />
+        <SsdlAssociationSetEnd
+          End="SCAData/Members[FK_Curso_Disciplina_Modulo_Formandos]/Members[Formandos]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Nome" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SCAData/Members[FK_Curso_Disciplina_Modulo_Formandos]/Members[Curso_Disciplina_Modulo]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="FK_Nome" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

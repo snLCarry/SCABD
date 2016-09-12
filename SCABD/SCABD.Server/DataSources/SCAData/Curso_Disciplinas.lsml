@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Curso_Disciplina">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="FK_nomedocurso"
+        PropertyType=":String">
+        <KeyProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <KeyProperty
+        Name="FK_nomedadisciplina"
+        PropertyType=":String">
+        <KeyProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="limitejus"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="limiteinjus"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Curso"
+        Association="FK_Curso_Disciplina_Curso"
+        FromEnd="Curso_Disciplina"
+        ToEnd="Curso" />
+      <NavigationProperty
+        Name="Disciplina"
+        Association="FK_Curso_Disciplina_Disciplina"
+        FromEnd="Curso_Disciplina"
+        ToEnd="Disciplina" />
+      <NavigationProperty
+        Name="Curso_Disciplina_Moduloes"
+        Association="FK_Curso_Disciplina_Modulo_Curso_Disciplina"
+        FromEnd="Curso_Disciplina"
+        ToEnd="Curso_Disciplina_Modulo" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Curso_Disciplina_Modulo_Curso_Disciplina">
+    <AssociationEnd
+      Name="Curso_Disciplina"
+      Multiplicity="One"
+      EntityType="Curso_Disciplina">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Curso_Disciplina_Modulo"
+      Multiplicity="Many"
+      EntityType="Curso_Disciplina_Modulo" />
+  </Association>
+  <EntityContainer
+    Name="SCAData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Curso_Disciplinas"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Curso_Disciplina" />
+    <AssociationSet
+      Name="FK_Curso_Disciplina_Modulo_Curso_Disciplina"
+      Association="FK_Curso_Disciplina_Modulo_Curso_Disciplina">
+      <AssociationSetEnd
+        Name="Curso_Disciplina"
+        EntitySet="Curso_Disciplinas" />
+      <AssociationSetEnd
+        Name="Curso_Disciplina_Modulo"
+        EntitySet="Curso_Disciplina_Moduloes" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Curso_Disciplinas_Single"
+      ReturnType="Curso_Disciplina">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="And">
+            <BinaryExpression.Left>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="FK_nomedadisciplina" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="FK_nomedadisciplina" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="FK_nomedocurso" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="FK_nomedocurso" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Curso_Disciplinas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="FK_nomedocurso"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'FK_nomedocurso' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+      <QueryOperationParameter
+        Name="FK_nomedadisciplina"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'FK_nomedadisciplina' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Curso_Disciplinas_SingleOrDefault"
+      ReturnType="Curso_Disciplina">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="And">
+            <BinaryExpression.Left>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="FK_nomedadisciplina" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="FK_nomedadisciplina" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="FK_nomedocurso" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="FK_nomedocurso" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Curso_Disciplinas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="FK_nomedocurso"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'FK_nomedocurso' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+      <QueryOperationParameter
+        Name="FK_nomedadisciplina"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'FK_nomedadisciplina' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SCADataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Curso_Disciplinas">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Curso_Disciplina" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="FK_nomedocurso"
+          Nullable="False"
+          Type="varchar"
+          Property="Curso_Disciplina/Properties[FK_nomedocurso]" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="FK_nomedadisciplina"
+          Nullable="False"
+          Type="varchar"
+          Property="Curso_Disciplina/Properties[FK_nomedadisciplina]" />
+        <SsdlProperty
+          Name="limitejus"
+          Nullable="True"
+          Type="int"
+          Property="Curso_Disciplina/Properties[limitejus]" />
+        <SsdlProperty
+          Name="limiteinjus"
+          Nullable="True"
+          Type="int"
+          Property="Curso_Disciplina/Properties[limiteinjus]" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Curso_Disciplina_Modulo_Curso_Disciplina">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Curso_Disciplina_Modulo_Curso_Disciplina" />
+        <SsdlAssociationSetEnd
+          End="SCAData/Members[FK_Curso_Disciplina_Modulo_Curso_Disciplina]/Members[Curso_Disciplina]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="FK_nomedocurso" />
+            <SsdlPropertyRef
+              Name="FK_nomedadisciplina" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SCAData/Members[FK_Curso_Disciplina_Modulo_Curso_Disciplina]/Members[Curso_Disciplina_Modulo]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="FK_nomedocurso" />
+            <SsdlPropertyRef
+              Name="FK_nomedadisciplina" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

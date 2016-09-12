@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Curso">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="nomedocurso"
+        PropertyType=":String">
+        <KeyProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="sigladocurso"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            IsFixedLength="True"
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="inicio"
+        PropertyType=":Date?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="0"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="fim"
+        PropertyType=":Date?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="0"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="hora"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Curso_Disciplinas"
+        Association="FK_Curso_Disciplina_Curso"
+        FromEnd="Curso"
+        ToEnd="Curso_Disciplina" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Curso_Disciplina_Curso">
+    <AssociationEnd
+      Name="Curso"
+      Multiplicity="One"
+      EntityType="Curso">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Curso_Disciplina"
+      Multiplicity="Many"
+      EntityType="Curso_Disciplina" />
+  </Association>
+  <EntityContainer
+    Name="SCAData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Cursoes"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Curso" />
+    <AssociationSet
+      Name="FK_Curso_Disciplina_Curso"
+      Association="FK_Curso_Disciplina_Curso">
+      <AssociationSetEnd
+        Name="Curso"
+        EntitySet="Cursoes" />
+      <AssociationSetEnd
+        Name="Curso_Disciplina"
+        EntitySet="Curso_Disciplinas" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Cursoes_Single"
+      ReturnType="Curso">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="nomedocurso" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="nomedocurso" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Cursoes" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="nomedocurso"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'nomedocurso' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Cursoes_SingleOrDefault"
+      ReturnType="Curso">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="nomedocurso" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="nomedocurso" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Cursoes" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="nomedocurso"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'nomedocurso' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SCADataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Cursoes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Curso" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="nomedocurso"
+          Nullable="False"
+          Type="varchar"
+          Property="Curso/Properties[nomedocurso]" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="sigladocurso"
+          Nullable="True"
+          Type="char"
+          Property="Curso/Properties[sigladocurso]" />
+        <SsdlProperty
+          Name="inicio"
+          Nullable="True"
+          Type="date"
+          Property="Curso/Properties[inicio]" />
+        <SsdlProperty
+          Name="fim"
+          Nullable="True"
+          Type="date"
+          Property="Curso/Properties[fim]" />
+        <SsdlProperty
+          Name="hora"
+          Nullable="True"
+          Type="int"
+          Property="Curso/Properties[hora]" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Curso_Disciplina_Curso">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Curso_Disciplina_Curso" />
+        <SsdlAssociationSetEnd
+          End="SCAData/Members[FK_Curso_Disciplina_Curso]/Members[Curso]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="nomedocurso" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SCAData/Members[FK_Curso_Disciplina_Curso]/Members[Curso_Disciplina]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="FK_nomedocurso" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

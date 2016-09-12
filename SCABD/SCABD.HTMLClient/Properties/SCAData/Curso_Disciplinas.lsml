@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application
+  Name="LightSwitchApplication.SCABD.HTMLClient" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <Application.Attributes>
+    <Partial />
+  </Application.Attributes>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:Curso_Disciplina" />
+      <DefaultScreen
+        Value="ViewCurso_Disciplina">
+        <DefaultScreen.Attributes>
+          <ScreenParameterMapping
+            ScreenParameter="ViewCurso_Disciplina/Properties[Curso_Disciplina]" />
+        </DefaultScreen.Attributes>
+      </DefaultScreen>
+    </EntityType.Attributes>
+  </EntityType>
+</Application>
