@@ -28,7 +28,7 @@
               Name="Formandos2"
               Kind="Collection"
               DataType="CollectionView$Formando"
-              View="Microsoft.LightSwitch.MobileWeb:Table">
+              View="Microsoft.LightSwitch.MobileWeb:TileList">
               <ContentItem.DataSource>
                 <ScreenExpressionTree>
                   <ChainExpression>
